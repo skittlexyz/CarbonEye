@@ -6,3 +6,6 @@
 - Better oled graphics
 - More readable
 - Better code
+
+# 1.0.4 Update
+- Temperature measuring
