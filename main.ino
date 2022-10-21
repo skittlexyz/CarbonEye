@@ -76,7 +76,7 @@ void table_content_draw(int x, int y){
     u8g2.drawStr(2, 24, "CO2");
     u8g2.drawStr(66, 24, "H2O");
 
-    u8g2.setFont( u8g2_font_inr16_mn);
+    u8g2.setFont(u8g2_font_inr16_mn);
 
     u8g2.setCursor(4, 50);
     u8g2.print(x);
