@@ -1,8 +1,6 @@
 /*
     Carbon Eye - bioTech
-
     A CO2 measure tool.
-
     by:
         Moisés Corrêa (CODE)
         Lethicia Barros Souza (JOURNAL)
