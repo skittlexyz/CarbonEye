@@ -3,6 +3,7 @@
 ### A CO2 measure tool with ESP32.
 
 ###### 1.0.0, 1.0.1 and 1.0.2 weren't on Github!
+###### The project GUI interfaces are all written in Brazillian Portuguese.
 
 # Code Updates
 
