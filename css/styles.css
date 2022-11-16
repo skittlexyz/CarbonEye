@@ -1,0 +1,124 @@
+body {
+    background-color: rgb(20, 20, 20);
+}
+.centered {
+    text-align: center;
+}
+.text1 {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-style: italic;
+    color: #00B63E;
+    font-size: 175%;
+    text-decoration: none;
+}
+.text1-2 {
+    color: #00B63E;
+    font-size:120%;
+    text-decoration: none;
+}
+.text2 {
+    color: rgb(150, 150, 150);
+}
+.text3 {
+    color: rgb(68, 68, 68);
+}
+.text4 {
+    color: rgb(255, 255, 255);
+}
+.nohover:hover {
+    color: #00B63E;
+}
+.btn {
+    border-color: #00B63E
+}
+.btn:hover {
+    border-color: #007527;
+}
+.sidebyside {
+    text-align: left;
+    margin: 1%;
+}
+.sidebyleft {
+    text-align: left;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+.block-size-margin {
+    min-width: 150px;
+    max-width: 200px;
+    min-height: 400px;
+    max-height: 450px;
+    display: inline-flex;
+    margin-bottom: 1%;
+    margin: 0.5%;
+}
+.profile-block-size {
+    min-width: 300px;
+    max-width: 400px;
+    min-height: 400px;
+    max-height: 450px;
+    display: inline-flex;
+    margin-bottom: 1%;
+    margin: 0.5%;
+}
+.cards-size {
+    width: 100%;
+}
+.top-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+.bottom-sticky {
+    justify-content: center;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.bottom-sticky-right {
+    justify-content: left;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.float-container {
+    padding: 1%;
+}
+.float-child {
+    width: 50%;
+    float: left;
+    padding:1px;
+}  
+#yellowbtn {
+    border-color: #ffbb00;
+}
+#yellowbtn:hover {
+    border-color: #946c00;
+}
+#colors {
+    height: 700px;
+    display: block;
+}
+#color-explain {
+    position: absolute;
+    white-space: nowrap;
+    left: 6.5em;
+    line-height: 405%;
+    font-size: 115%;
+    color: rgb(150, 150, 150);
+}
+.profile-form {
+    background-color: rgb(68, 68, 68);
+}
+#profile-card {
+    position: relative;
+    left: -24rem;
+}
+#imgMap {
+    text-align: left;
+    margin-left: 50px;
+    display: block;
+}

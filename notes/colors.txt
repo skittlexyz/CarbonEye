@@ -1,0 +1,5 @@
+roxo		7D6AEE
+vermelho	EF5050
+amarelo		FFEB37
+verde		6AEE7C
+azul		88E2FF

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="icon" href="../assets/favicon.svg" />
+    <title>
+        CarbonEye
+    </title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark top-sticky">
+        <div class="container-fluid">
+            <a class="text1 nohover" href="./index.html">CarbonEye🍃</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./colors.html">Cores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./profile.html">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./config.html">Configurações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./suport.html">Suporte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="float-container">
+        <div class="sidebyleft">
+            <h1 class="text2">Código de Cores</h1>
+        </div>
+        <div class="sidebyside text4">
+            Cada cor representa uma intensidade na presença do dióxido de carbono.
+        </div>
+        <div class="sidebyside cards-size">
+            <div class="block-size-margin">
+                <canvas id="colors"></canvas>
+            </div>
+            <div class="block-size-margin" id="color-explain">
+                <div>
+                    <span style="color: white;"><b>Roxo</b></span><span> Muito forte, acima de 100% de CO² no ar. Acima de 2.100 ppm.</span>
+                    <br><span style="color: white;"><b>Vermelho</b></span><span> Forte, 65 a 100% de CO² no ar. 1.500 a 2.100 ppm.</span>
+                    <br><span style="color: white;"><b>Amarelo</b></span><span> Médio, 45 a 65% de CO² no ar. 1.100 a 1.500 ppm.</span>
+                    <br><span style="color: white;"><b>Verde</b></span><span> Fraco, 5 a 45% de CO² no ar. 600 a 1.100 ppm.</span><br>
+                    <span style="color: white;"><b>Azul</b></span><span> Limpo, 0 a 5% de CO² no ar. 400 a 600 ppm.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark bottom-sticky-right">
+        <a href="./index.html">
+            <img src="../assets/logo2.png" alt="logo" style="width: 50px; margin: 10%;">
+        </a>
+    </nav>
+    <script>
+        drawCircles();
+        function drawCircles() {
+            var canvas = document.getElementById("colors");
+            canvas.width = 100;
+            canvas.height = window.innerHeight;
+            var ctx = canvas.getContext("2d");
+            var xMargin = 50;
+            var yMargin = 50;
+            var fillDistance = 50;
+            var radius = 40;
+
+            ctx.beginPath();
+            ctx.arc(xMargin, yMargin, radius, 0 * Math.PI, 3 * Math.PI);
+            ctx.fillStyle = '#7D6AEE';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(xMargin, yMargin + (fillDistance * 2), radius, 0 * Math.PI, 3 * Math.PI);
+            ctx.fillStyle = '#EF5050';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(xMargin, yMargin + (fillDistance * 4), radius, 0 * Math.PI, 3 * Math.PI);
+            ctx.fillStyle = '#FFEB37';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(xMargin, yMargin + (fillDistance * 6), radius, 0 * Math.PI, 3 * Math.PI);
+            ctx.fillStyle = '#6AEE7C';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(xMargin, yMargin + (fillDistance * 8), radius, 0 * Math.PI, 3 * Math.PI);
+            ctx.fillStyle = '#88E2FF';
+            ctx.fill();
+        }
+    </script>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
