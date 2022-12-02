@@ -25,3 +25,8 @@
 ## 2.0.0 Update
 - Fix on Ajax value updates.
 - Added IP display on code start.
+
+## 2.0.1 Update
+- Changed images.
+- Fixed small bugs.
+- Made site on [skittlexyz.github.io](https://skittlexyz.github.io/)

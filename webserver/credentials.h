@@ -1,2 +1,2 @@
-const char NAME[] PROGMEM = R"=====(WIFI NAME GOES HERE)=====";
-const char PASS[] PROGMEM = R"=====(WIFI PASSWORD GOES HERE)=====";
+const char NAME[] PROGMEM = R"=====(mms260131)=====";
+const char PASS[] PROGMEM = R"=====(sumumo01)=====";

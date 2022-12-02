@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.statically.io/gh/skittlexyz/carboneye_assets/main/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.statically.io/gh/skittlexyz/carboneye_assets/main/css/styles.css">
+
+    <link rel="icon" href="https://cdn.statically.io/gh/skittlexyz/carboneye_assets/main/assets/favicon.svg" />
+    <title>
+        CarbonEye
+    </title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark top-sticky">
+        <div class="container-fluid">
+            <a class="text1 nohover" href="./index.html">CarbonEye🍃</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Página Inicial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./colors.html">Cores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="./profile.html">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./config.html">Configurações</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./suport.html">Suporte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="float-container">
+        <div class="float-child">
+            <div class="sidebyleft">
+                <h1 class="text2">Perfil</h1>
+            </div>
+            <div>
+                <canvas id="profile"></canvas>
+            </div>
+            <div class="sidebyside cards-size">
+                <div class="profile-block-size" id="profile-info">
+                    <div>
+                        <form class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label text2">E-mail</label>
+                                <input type="email" class="form-control profile-form" placeholder="E-mail Exemplo"
+                                    disabled>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text2">Nome</label>
+                                <input type="text" class="form-control profile-form" placeholder="Nome Exemplo"
+                                    disabled>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text2">Endereço</label>
+                                <input type="text" class="form-control profile-form" placeholder="Endereço Exemplo"
+                                    disabled>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label text2">Código Postal</label>
+                                <input type="text" class="form-control profile-form" placeholder="Código Postal Exemplo"
+                                    disabled>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary bg-dark">Editar</button> <button
+                                    class="btn btn-primary bg-dark" disabled>Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="profile-card">
+        <div class="card bg-dark block-size-margin">
+            <img src="https://cdn.statically.io/gh/skittlexyz/carboneye_assets/main/assets/logo1.png" class="card-img-top" alt="carboneye three">
+            <div class="card-body">
+                <h5 class="card-title text4">Gestão de Dados</h5>
+                <p class="card-text text2">Verifique e controle seus dados internos.</p>
+                <a href="#" class="btn btn-primary bg-dark">Abrir</a>
+            </div>
+        </div>
+        <div class="card bg-dark block-size-margin">
+            <img src="https://cdn.statically.io/gh/skittlexyz/carboneye_assets/main/assets/logo1.png" class="card-img-top" alt="carboneye three">
+            <div class="card-body">
+                <h5 class="card-title text4">Campanhas Ativas</h5>
+                <p class="card-text text2">Gerencia suas campanhas ativas.</p>
+                <a href="#" class="btn btn-primary bg-dark">Abrir</a>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-dark bg-dark bottom-sticky-right">
+        <a href="./index.html">
+            <img src="https://cdn.statically.io/gh/skittlexyz/carboneye_assets/main/assets/logo2.png" alt="logo" style="width: 50px; margin: 10%;">
+        </a>
+    </nav>
+    <script>
+        drawProfile();
+        function drawProfile() {
+            var canvas = document.getElementById("profile");
+            canvas.width = (window.innerWidth - 100);
+            canvas.height = 250;
+            var ctx = canvas.getContext("2d");
+            var xMargin = 220;
+            var yMargin = 125;
+            var radius = 125;
+            ctx.beginPath();
+            ctx.arc(xMargin, yMargin, radius, 0 * Math.PI, 3 * Math.PI);
+            ctx.fillStyle = '#575757';
+            ctx.fill();
+            ctx.font = "bolder 30px Arial";
+            ctx.fillStyle = '#141414';
+            ctx.fillText("Foto", 185, 125);
+            ctx.font = "bolder 30px Arial";
+            ctx.fillStyle = '#141414';
+            ctx.fillText("Exemplo", 155, 155);
+            ctx.beginPath();
+            ctx.arc(285, 215, 30, 0 * Math.PI, 3 * Math.PI);
+            ctx.fillStyle = '#575757';
+            ctx.fill();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = '#141414';
+            ctx.stroke();
+            var numberOfSides = 4,
+                size = 10,
+                Xcenter = 287,
+                Ycenter = 217;
+            ctx.beginPath();
+            ctx.moveTo(Xcenter + size * Math.cos(0), Ycenter + size * Math.sin(0));
+            for (var i = 1; i <= numberOfSides; i += 1) {
+                ctx.lineTo(Xcenter + size * Math.cos(i * 2 * Math.PI / numberOfSides), Ycenter + size * Math.sin(i * 2 * Math.PI / numberOfSides));
+            }
+            ctx.fillStyle = '#141414';
+            ctx.fill();
+            var numberOfSides = 4,
+                size = 10,
+                Xcenter = 292,
+                Ycenter = 222;
+            ctx.beginPath();
+            ctx.moveTo(Xcenter + size * Math.cos(0), Ycenter + size * Math.sin(0));
+            for (var i = 1; i <= numberOfSides; i += 1) {
+                ctx.lineTo(Xcenter + size * Math.cos(i * 2 * Math.PI / numberOfSides), Ycenter + size * Math.sin(i * 2 * Math.PI / numberOfSides));
+            }
+            ctx.fillStyle = '#141414';
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(274, 214);
+            ctx.lineTo(270, 200);
+            ctx.lineTo(284, 204);
+            ctx.fillStyle = '#141414';
+            ctx.fill();
+            return true;
+        }
+    </script>
+    <script src="https://cdn.statically.io/gh/skittlexyz/carboneye_assets/main/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

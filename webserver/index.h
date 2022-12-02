@@ -16,8 +16,11 @@ const char MAIN_page[] PROGMEM = R"=====(
     <body>
         <nav class="navbar navbar-dark bg-dark top-sticky">
             <div class="container-fluid">
-                <a class="text1 nohover" href="http://127.0.0.1:3000/carboneyepage/pages/index.html">CarbonEye🍃</a>
-                <a href="http://127.0.0.1:3000/carboneyepage/pages/index.html" type="button">
+
+                <!-- Change the Index page IP down below. -->
+
+                <a class="text1 nohover" href="http://127.0.0.1:3000/pages/index.html">CarbonEye🍃</a>
+                <a href="http://127.0.0.1:3000/pages/index.html" type="button">
                     <span clas>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#969696"
                             class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
@@ -54,8 +57,8 @@ const char MAIN_page[] PROGMEM = R"=====(
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Produção</h5>
-                            <p class="card-text">CarbonEye localizado na Produção da empresa.</p>
+                            <h5 class="card-title">Sala de Aula</h5>
+                            <p class="card-text">CarbonEye localizado na Sala de Aula.</p>
                             <p class="card-text">PPM (partes por milhão): <span id="ppm">0</span></p>
                             <p class="card-text">Temperatura (Cº): <span id="temp">0</span></p>
                             <p class="card-text"><small class="text-muted">Última atualização agora.</small></p>
