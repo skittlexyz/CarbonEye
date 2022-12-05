@@ -16,11 +16,8 @@ const char MAIN_page[] PROGMEM = R"=====(
     <body>
         <nav class="navbar navbar-dark bg-dark top-sticky">
             <div class="container-fluid">
-
-                <!-- Change the Index page IP down below. -->
-
-                <a class="text1 nohover" href="http://127.0.0.1:3000/pages/index.html">CarbonEye🍃</a>
-                <a href="http://127.0.0.1:3000/pages/index.html" type="button">
+                <a class="text1 nohover" href="http://127.0.0.1:3000/carboneyepage/pages/index.html">CarbonEye🍃</a>
+                <a href="http://127.0.0.1:3000/carboneyepage/pages/index.html" type="button">
                     <span clas>
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#969696"
                             class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
