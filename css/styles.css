@@ -99,13 +99,13 @@ body {
     border-color: #946c00;
 }
 #colors {
-    height: 43.6em;
+    height: 28.6em;
     display: block;
 }
 #color-explain {
     position: absolute;
     white-space: nowrap;
-    left: 6.7em;
+    left: 6.3em;
     line-height: 4.01em;
     font-size: 1.16em;
     color: rgb(150, 150, 150);
@@ -115,7 +115,7 @@ body {
 }
 #profile-card {
     position: relative;
-    left: -24rem;
+    right: 11rem;
 }
 #imgMap {
     text-align: left;
