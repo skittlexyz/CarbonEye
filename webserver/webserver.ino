@@ -1,181 +1,193 @@
-    /*
-        CarbonEye - bioTech
-        A CO2 measure tool.
-    */
+/*
+    CarbonEye - bioTech
+    A CO2 measure tool.
+*/
 
-    #include <WiFi.h>
-    #include <WiFiClient.h>
-    #include <WebServer.h>
-    #include <U8g2lib.h>
-    #include "DHT.h"
-    #ifdef U8X8_HAVE_HW_I2C
-    #include <Wire.h>
-    #endif
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <WebServer.h>
+#include <U8g2lib.h>
+#include "DHT.h"
+#ifdef U8X8_HAVE_HW_I2C
+#include <Wire.h>
+#endif
 
-    #include "index.h"
-    #include "credentials.h"
+#include "index.h"
+#include "credentials.h"
 
-    WebServer server(80);
+WebServer server(80);
 
-    const char *ssid = NAME;
-    const char *password = PASS;
+const char *ssid = NAME;
+const char *password = PASS;
 
-    byte delay_time = 200;
-    String version = "2 0 1";
-    int gasPin = 34;
+byte delay_time = 200;
+String version = "2 0 1";
+int gasPin = 34;
 
-    int gasVal = 0;
-    int tempVal = 0;
+int gasVal = 0;
+int tempVal = 0;
 
-    void gui_draw(int delay_time, int val1, int val2);
-    void title_and_version_draw();
-    void lines_draw();
-    void table_content_draw(int x, int y);
-    void ip_display();
+int ledPin = 19;
 
-    U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE);
-    DHT dht(2, DHT22);
+void gui_draw(int delay_time, int val1, int val2);
+void title_and_version_draw();
+void lines_draw();
+void table_content_draw(int x, int y);
+void ip_display();
 
-    void handleRoot()
+U8G2_SSD1306_128X64_NONAME_F_HW_I2C u8g2(U8G2_R0, /* reset=*/U8X8_PIN_NONE);
+DHT dht(2, DHT22);
+
+void handleRoot()
+{
+    String s = MAIN_page;
+    server.send(200, "text/html", s);
+}
+
+void handleVal1()
+{
+    gasVal = analogRead(gasPin);
+    String val1 = String(gasVal);
+    Serial.print("GasVal: ");
+    Serial.println(val1);
+
+    digitalWrite(ledPin, HIGH);
+    delay(15);
+    digitalWrite(ledPin, LOW);
+    delay(15);
+
+    server.send(200, "text/plane", val1);
+}
+
+void handleVal2()
+{
+    tempVal = dht.readTemperature();
+    String val2 = String(tempVal);
+    Serial.print("TmpVal: ");
+    Serial.println(val2);
+
+    digitalWrite(ledPin, HIGH);
+    delay(15);
+    digitalWrite(ledPin, LOW);
+    delay(15);
+
+    server.send(200, "text/plane", val2);
+}
+
+void setup(void)
+{
+    Serial.begin(115200);
+    Serial.println();
+    Serial.println("Booting Sketch...");
+
+    pinMode(ledPin, OUTPUT);
+
+    dht.begin();
+    u8g2.begin();
+    u8g2.clearBuffer();
+    pinMode(gasPin, INPUT);
+
+    WiFi.mode(WIFI_STA);
+    WiFi.begin(ssid, password);
+
+    Serial.println("Connecting to ");
+    Serial.print(ssid);
+
+    while (WiFi.waitForConnectResult() != WL_CONNECTED)
     {
-        String s = MAIN_page;
-        server.send(200, "text/html", s);
+        Serial.print(".");
     }
 
-    void handleVal1()
-    {
-        gasVal = analogRead(gasPin);
-        String val1 = String(gasVal);
-        Serial.print("GasVal: ");Serial.println(val1);
+    Serial.println("");
+    Serial.print("Connected to ");
+    Serial.println(ssid);
+    Serial.print("IP address: ");
+    Serial.println(WiFi.localIP());
 
-        //String val1 = "fuck ";
+    ip_display();
 
-        server.send(200, "text/plane", val1);
-    }
+    server.on("/", handleRoot);
+    server.on("/readVal1", handleVal1);
+    server.on("/readVal2", handleVal2);
 
-    void handleVal2()
-    {
-        tempVal = dht.readTemperature();
-        String val2 = String(tempVal);
-        Serial.print("TmpVal: ");Serial.println(val2);
+    server.begin();
+    Serial.println("HTTP server started");
+}
 
-        //String val2 = "you!";
+void loop(void)
+{
+    gui_draw(1000, gasVal, tempVal);
+    server.handleClient();
+    delay(1);
+}
 
-        server.send(200, "text/plane", val2);
-    }
+void ip_display()
+{
+    u8g2.clearBuffer();
+    u8g2.setFont(u8g2_font_helvB08_tf);
+    u8g2.setCursor(0, 54);
+    String network = ssid;
+    u8g2.print("Connected to " + network);
+    u8g2.setCursor(0, 64);
+    u8g2.print(WiFi.localIP());
+    u8g2.sendBuffer();
+    delay(5000);
+    u8g2.clearBuffer();
+    u8g2.setFont(u8g2_font_DigitalDisco_te);
+    u8g2.drawStr(36, 35, "bioTech");
+    u8g2.sendBuffer();
+    delay(5000);
+}
 
-    void setup(void)
-    {
-        Serial.begin(115200);
-        Serial.println();
-        Serial.println("Booting Sketch...");
+void gui_draw(int delay_time, int val1, int val2)
+{
+    u8g2.clearBuffer();
+    title_and_version_draw();
+    lines_draw();
+    table_content_draw(val1, val2);
+    u8g2.sendBuffer();
+    delay(delay_time);
+}
 
-        dht.begin();
-        u8g2.begin();
-        u8g2.clearBuffer();
-        pinMode(gasPin, INPUT);
+void title_and_version_draw()
+{
+    u8g2.setFont(u8g2_font_DigitalDisco_te);
+    u8g2.drawStr(0, 13, "Carbon Eye");
+    u8g2.setFont(u8g2_font_fivepx_tr);
+    u8g2.drawStr(108, 13, "1.0.2");
+    u8g2.setCursor(108, 13);
+    u8g2.print(version);
+}
 
-        WiFi.mode(WIFI_STA);
-        WiFi.begin(ssid, password);
+void lines_draw()
+{
+    u8g2.drawLine(0, 17, 128, 17);
+    u8g2.drawLine(64, 17, 64, 64);
+    u8g2.drawLine(0, 17, 0, 64);
+    u8g2.drawLine(127, 17, 127, 64);
+    u8g2.drawLine(0, 63, 128, 63);
+    u8g2.drawLine(0, 25, 128, 25);
+}
 
-        Serial.println("Connecting to ");
-        Serial.print(ssid);
+void table_content_draw(int x, int y)
+{
+    u8g2.setFont(u8g2_font_fivepx_tr);
+    u8g2.drawStr(2, 24, "PPM");
+    u8g2.drawStr(66, 24, "Cº");
 
-        while (WiFi.waitForConnectResult() != WL_CONNECTED)
-        {
-            Serial.print(".");
-        }
+    u8g2.setFont(u8g2_font_inr16_mn);
 
-        Serial.println("");
-        Serial.print("Connected to ");
-        Serial.println(ssid);
-        Serial.print("IP address: ");
-        Serial.println(WiFi.localIP());
+    u8g2.setCursor(4, 50);
+    u8g2.print(x);
 
-        ip_display();
+    u8g2.setCursor(68, 50);
+    u8g2.print(y);
+}
 
-        server.on("/", handleRoot);
-        server.on("/readVal1", handleVal1);
-        server.on("/readVal2", handleVal2);
-
-        server.begin();
-        Serial.println("HTTP server started");
-    }
-
-    void loop(void)
-    {    
-        gui_draw(1000, gasVal, tempVal);
-        server.handleClient();
-        delay(1);
-    }
-
-    void ip_display()
-    {
-        u8g2.clearBuffer();
-        u8g2.setFont(u8g2_font_helvB08_tf);
-        u8g2.setCursor(0, 54);
-        String network = ssid;
-        u8g2.print("Connected to " + network);
-        u8g2.setCursor(0, 64);
-        u8g2.print(WiFi.localIP());
-        u8g2.sendBuffer();
-        delay(5000);
-        u8g2.clearBuffer();
-        u8g2.setFont(u8g2_font_DigitalDisco_te);
-        u8g2.drawStr(36, 35, "bioTech");
-        u8g2.sendBuffer();
-        delay(5000);
-    }
-
-    void gui_draw(int delay_time, int val1, int val2)
-    {
-        u8g2.clearBuffer();
-        title_and_version_draw();
-        lines_draw();
-        table_content_draw(val1, val2);
-        u8g2.sendBuffer();
-        delay(delay_time);
-    }
-
-    void title_and_version_draw()
-    {
-        u8g2.setFont(u8g2_font_DigitalDisco_te);
-        u8g2.drawStr(0, 13, "Carbon Eye");
-        u8g2.setFont(u8g2_font_fivepx_tr);
-        u8g2.drawStr(108, 13, "1.0.2");
-        u8g2.setCursor(108, 13);
-        u8g2.print(version);
-    }
-
-    void lines_draw()
-    {
-        u8g2.drawLine(0, 17, 128, 17);
-        u8g2.drawLine(64, 17, 64, 64);
-        u8g2.drawLine(0, 17, 0, 64);
-        u8g2.drawLine(127, 17, 127, 64);
-        u8g2.drawLine(0, 63, 128, 63);
-        u8g2.drawLine(0, 25, 128, 25);
-    }
-
-    void table_content_draw(int x, int y)
-    {
-        u8g2.setFont(u8g2_font_fivepx_tr);
-        u8g2.drawStr(2, 24, "PPM");
-        u8g2.drawStr(66, 24, "Cº");
-
-        u8g2.setFont(u8g2_font_inr16_mn);
-
-        u8g2.setCursor(4, 50);
-        u8g2.print(x);
-
-        u8g2.setCursor(68, 50);
-        u8g2.print(y);
-    }
-
-    /*
-    Fonts used:
-        u8g2_font_DigitalDisco_te
-        u8g2_font_fivepx_tr
-        u8g2_font_inr16_mn
-        u8g2_font_helvB08_tf
-    */
+/*
+Fonts used:
+    u8g2_font_DigitalDisco_te
+    u8g2_font_fivepx_tr
+    u8g2_font_inr16_mn
+    u8g2_font_helvB08_tf
+*/
